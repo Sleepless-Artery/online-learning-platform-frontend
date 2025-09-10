@@ -11,77 +11,6 @@ function decodeJWT(token) {
     }
 }
 
-// async function fetchWithAuth(url, options = {}) {
-//     const headers = { 
-//         'Content-Type': 'application/json',
-//         ...(token && { 'Authorization': `Bearer ${token}` })
-//     };
-//     try {
-//         const res = await fetch(`${API_BASE_URL}${url}`, { ...options, headers });
-        
-//         if (!res.ok) {
-//             let errorMessage;
-            
-//             switch (res.status) {
-//                 case 401:
-//                     errorMessage = 'Incorrect login or password';
-//                     break;
-//                 case 404:
-//                     errorMessage = 'Make sure that an account with this login exists';
-//                     break;
-//                 case 500:
-//                     errorMessage = 'Internal server error';
-//                     break;
-//                 default:
-//                     try {
-//                         const errorData = await res.json();
-//                         errorMessage = errorData.message || `Error ${res.status}`;
-//                     } catch {
-//                         errorMessage = `Error ${res.status}`;
-//                     }
-//             }
-            
-//             throw new Error(errorMessage);
-//         }
-        
-//         if (res.status === 204 || res.headers.get('content-length') === '0') {
-//             return {};
-//         }
-        
-//         try {
-//             return await res.json();
-//         } catch {
-//             return {};
-//         }
-//     } catch (err) {
-//         showError(err.message);
-//         throw err;
-//     }
-// }
-
-// function showError(message) {
-//     let displayMessage = message;
-
-//     if (message.includes('Failed to') || message.includes('failed to')) {
-//         const parts = message.split(':');
-//         if (parts.length > 1) {
-//             displayMessage = parts[1].trim();
-//         }
-//     }
-    
-//     if (message.includes('Failed to fetch')) {
-//         displayMessage = 'Network error. Please check your connection.';
-//     } else if (message.includes('Unexpected token')) {
-//         displayMessage = 'Server error. Please try again later.';
-//     }
-    
-//     const errorDiv = document.createElement('div');
-//     errorDiv.className = 'error';
-//     errorDiv.textContent = displayMessage;
-//     document.getElementById('content').prepend(errorDiv);
-//     setTimeout(() => errorDiv.remove(), 5000);
-// }
-
 
 let currentErrorElement = null;
 
@@ -652,7 +581,7 @@ async function confirmRegistration(email, password) {
 }
 
 async function initiatePasswordReset() {
-    const email = document.getElementById('reset-email').value;
+    const email = document.getElementById('forgot-email').value;
     try {
         await fetchWithAuth(`/auth/forgot-password?emailAddress=${email}`, { method: 'POST' });
         
